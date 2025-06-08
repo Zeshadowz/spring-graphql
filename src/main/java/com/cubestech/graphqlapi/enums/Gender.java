@@ -1,16 +1,16 @@
 package com.cubestech.graphqlapi.enums;
 
-public enum Gender {
-    MALE ('M'),
-    FEMALE ('F');
 
-    private Character value;
+import lombok.Getter;
 
-    private Gender(Character value) {
-        this.value = value;
-    }
+@Getter
+public enum Gender implements BaseEnum<Character> {
+    MALE('M'),
+    FEMALE('F');
 
-    public Character getCharacter() {
-        return value;
+    private final Character code;
+
+    private Gender(Character code) {
+        this.code = code;
     }
 }

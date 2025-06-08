@@ -1,6 +1,7 @@
 package com.cubestech.graphqlapi.controller;
 
-import com.cubestech.graphqlapi.enums.AddressType;
+import com.cubestech.graphqlapi.dto.AddressInput;
+import com.cubestech.graphqlapi.mappers.AddressMapper;
 import com.cubestech.graphqlapi.model.Address;
 import com.cubestech.graphqlapi.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 public class AddressController {
 
     private final AddressService addressService;
+    private final AddressMapper addressMapper;
 
 
     @QueryMapping
@@ -23,17 +25,8 @@ public class AddressController {
         return addressService.getAllAddresses();
     }
 
-    @MutationMapping
-    public Address createAddress(
-            @Argument String street,
-            @Argument String additional,
-            @Argument String number,
-            @Argument String zipcode,
-            @Argument String city,
-            @Argument String state,
-            @Argument String country,
-            @Argument String addressType) {
-        Address address = new Address(null, street, additional, number, zipcode, city, state, country, AddressType.valueOf(addressType));
-        return addressService.saveAddress(address);
+    @MutationMapping(name = "createAddress")
+    public Address create_Address(@Argument(name = "address") AddressInput input) {
+        return addressService.saveAddress(input);
     }
 }

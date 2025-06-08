@@ -1,6 +1,8 @@
 package com.cubestech.graphqlapi.service;
 
 import com.cubestech.graphqlapi.dao.AddressRepository;
+import com.cubestech.graphqlapi.dto.AddressInput;
+import com.cubestech.graphqlapi.mappers.AddressMapper;
 import com.cubestech.graphqlapi.model.Address;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import java.util.UUID;
 @Service
 public class AddressService {
     private final AddressRepository addressRepository;
+    private final AddressMapper addressMapper;
 
     public Optional<Address> getAddressById(UUID id) {
         return addressRepository.findById(id);
@@ -23,7 +26,8 @@ public class AddressService {
         return addressRepository.findAll();
     }
 
-    public Address saveAddress(Address address) {
-        return addressRepository.save(address);
+    public Address saveAddress(AddressInput address) {
+        address.setId(null);
+        return addressRepository.save(addressMapper.dtoToModel(address));
     }
 }

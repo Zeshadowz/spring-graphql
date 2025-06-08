@@ -6,7 +6,7 @@ import jakarta.persistence.Converter;
 import java.util.stream.Stream;
 
 @Converter(autoApply = true)
-public class EnumBaseConverter<T extends Enum<T> & BaseEnum<String>> implements AttributeConverter<T, String> {
+public class EnumBaseConverter<T extends Enum<T> & BaseEnum<U>, U> implements AttributeConverter<T, U> {
 
     private final Class<T> enumClass;
 
@@ -15,7 +15,7 @@ public class EnumBaseConverter<T extends Enum<T> & BaseEnum<String>> implements 
     }
 
     @Override
-    public T convertToEntityAttribute(String code) {
+    public T convertToEntityAttribute(U code) {
         return code == null ? null :
                 Stream.of(enumClass.getEnumConstants())
                         .filter(e -> e.getCode().equals(code))
@@ -24,7 +24,7 @@ public class EnumBaseConverter<T extends Enum<T> & BaseEnum<String>> implements 
     }
 
     @Override
-    public String convertToDatabaseColumn(T attribute) {
+    public U convertToDatabaseColumn(T attribute) {
         return attribute == null ? null : attribute.getCode();
     }
 
