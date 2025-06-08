@@ -25,6 +25,15 @@ type Person {
     address: [Address]
 }
 
+type Customer {
+    id: ID!
+    title: String
+    firstName: String!
+    lastName: String!
+    birthDate: Date
+    gender: String!
+}
+
 type Address {
     id: ID!
     street: String!
@@ -39,6 +48,7 @@ type Address {
 
 "Query Root"
 type Query{
+    customers: [Customer]
     authors: [Author]
     authorById(id: ID!): Author
     getAllPersons: [Person!]!
@@ -50,6 +60,15 @@ type Query{
 
 
 # Mutation
+input CustomerInput {
+    id: ID
+    title: String
+    firstName: String!
+    lastName: String!
+    birthDate: Date
+    gender: String!
+}
+
 input AddressInput {
     id: ID
     street: String!
@@ -64,6 +83,7 @@ input AddressInput {
 
 "Mutation Root"
 type Mutation {
+    createCustomer(customer: CustomerInput!): Customer
     createPerson(firstname: String!, dateOfBirth: Date!, alive: Boolean!): Person!
     updatePerson(id: ID!, firstname: String!, dateOfBirth: Date!, alive: Boolean!): Person!
     createAddress(address: AddressInput!): Address
