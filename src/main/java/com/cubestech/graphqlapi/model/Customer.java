@@ -19,6 +19,8 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(unique = true, nullable = false)
+    private String customerNumber;
     private String title;
     private String firstName;
     private String lastName;

@@ -28,6 +28,7 @@ type Person {
 type Customer {
     id: ID!
     title: String
+    customerNumber: String!
     firstName: String!
     lastName: String!
     birthDate: Date
@@ -62,6 +63,7 @@ type Query{
 # Mutation
 input CustomerInput {
     id: ID
+    customerNumber: String
     title: String
     firstName: String!
     lastName: String!
