@@ -43,7 +43,7 @@ public class GraphqlApiApplication {
                     new Book("TDD Test Driven Development", josh)
             ));
 
-            Customer james = new Customer(null, "", "Lebron", "James", Gender.MALE, null);
+            Customer james = new Customer(null,"", "", "Lebron", "James", Gender.MALE, null);
             customerRepository.saveAll(List.of(james));
 
             Address home = new Address(null, "Steubenstraße", null, "54", "90763", "Fürth", null, "Deutschland", AddressType.HOME);

@@ -79,6 +79,23 @@ mutation create_address{
 }
 ```
 
+```graphql
+mutation create_customer {
+  createCustomer(customer: {
+    id : "will generated"
+    customerNumber: "will generated"
+    title: "Prof."
+    firstName: "Emilia"
+    lastName: "Foster"
+    birthDate: "1980-12-28"
+    gender: "FEMALE"
+  }){
+    id
+    customerNumber
+  }
+}
+```
+
 #### JSON Syntax
 
 ```json
