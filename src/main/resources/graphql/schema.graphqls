@@ -2,19 +2,6 @@ scalar Date
 scalar UUID
 
 # Query
-
-type Author {
-    id: ID!
-    name: String!
-    books: [Book]
-}
-
-type Book {
-    id: ID!
-    title: String!
-    publisher: String
-}
-
 type Person {
     id: ID!
     firstname: String!
@@ -50,8 +37,6 @@ type Address {
 "Query Root"
 type Query{
     customers: [Customer]
-    authors: [Author]
-    authorById(id: ID!): Author
     getAllPersons: [Person!]!
     getPersonById(id: ID!): Person
     allAddresses: [Address]

@@ -53,8 +53,6 @@ public class GraphqlApiApplication {
 
             james.getAddresses().forEach(address -> address.setCustomer(james));
             customerRepository.saveAll(List.of(james));
-
-
         };
     }
 
