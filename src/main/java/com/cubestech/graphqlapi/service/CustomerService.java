@@ -5,6 +5,7 @@ import com.cubestech.graphqlapi.dto.CustomerInput;
 import com.cubestech.graphqlapi.mappers.CustomerMapper;
 import com.cubestech.graphqlapi.model.Customer;
 import com.cubestech.graphqlapi.utils.CodeGenerator;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,13 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public Customer create(CustomerInput customer) {
-        customer.setId(null);
-        customer.setCustomerNumber(CodeGenerator.generateCustomerNumber());
-        return customerRepository.save(customerMapper.toModel(customer));
+    @Transactional
+    public Customer create(CustomerInput dto) {
+        dto.setId(null);
+        dto.setCustomerNumber(CodeGenerator.generateCustomerNumber());
+        Customer customer = customerMapper.toModel(dto);
+        customer.getAddresses().forEach(address -> address.setCustomer(customer));
+        return customerRepository.save(customer);
     }
 
     public Iterable<Customer> findAll() {

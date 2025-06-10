@@ -3,6 +3,7 @@ package com.cubestech.graphqlapi.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +18,5 @@ public class CustomerInput {
     private String lastName;
     private LocalDate birthDate;
     private String gender;
+    private List<AddressInput> addresses;
 }

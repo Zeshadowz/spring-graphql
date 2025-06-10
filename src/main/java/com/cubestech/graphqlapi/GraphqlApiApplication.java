@@ -10,6 +10,7 @@ import com.cubestech.graphqlapi.model.Address;
 import com.cubestech.graphqlapi.model.Author;
 import com.cubestech.graphqlapi.model.Book;
 import com.cubestech.graphqlapi.model.Customer;
+import com.cubestech.graphqlapi.utils.CodeGenerator;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,12 +44,36 @@ public class GraphqlApiApplication {
                     new Book("TDD Test Driven Development", josh)
             ));
 
-            Customer james = new Customer(null,"", "", "Lebron", "James", Gender.MALE, null);
+            Address home = Address.builder()
+                    .street("Home Street")
+                    .number("Home Number")
+                    .zipcode("65479")
+                    .city("Home City")
+                    .country("Home Country")
+                    .addressType(AddressType.HOME)
+                    .build();
+            Address work = Address.builder()
+                    .street("Landgraben")
+                    .number("4")
+                    .zipcode("98745")
+                    .city("Nürnberg")
+                    .country("Germany")
+                    .addressType(AddressType.HOME)
+                    .build();
+
+            Customer james = Customer.builder()
+                    .customerNumber(CodeGenerator.generateCustomerNumber())
+                    .title("NBA")
+                    .firstName("James")
+                    .lastName("Doe")
+                    .gender(Gender.MALE)
+                    .addresses(List.of(home, work))
+                    .build();
+
+            james.getAddresses().forEach(address -> address.setCustomer(james));
             customerRepository.saveAll(List.of(james));
 
-            Address home = new Address(null, "Steubenstraße", null, "54", "90763", "Fürth", null, "Deutschland", AddressType.HOME);
-            Address work = new Address(null, "Landgraben", null, "4", "907441", "Nürnberg", null, "Deutschland", AddressType.WORK);
-            addressRepository.saveAll(List.of(home, work));
+
         };
     }
 
