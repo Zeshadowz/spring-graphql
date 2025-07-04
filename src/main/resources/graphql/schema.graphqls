@@ -2,15 +2,6 @@ scalar Date
 scalar UUID
 
 # Query
-type Person {
-    id: ID!
-    firstname: String!
-    lastname: String!
-    dateOfBirth: Date!
-    alive: Boolean!
-    address: [Address]
-}
-
 type Customer {
     id: ID!
     title: String
@@ -37,8 +28,6 @@ type Address {
 "Query Root"
 type Query{
     customers: [Customer]
-    getAllPersons: [Person!]!
-    getPersonById(id: ID!): Person
     allAddresses: [Address]
     addressById(id: ID!): Address
 }
@@ -70,8 +59,6 @@ input AddressInput {
 "Mutation Root"
 type Mutation {
     createCustomer(customer: CustomerInput!): Customer
-    createPerson(firstname: String!, dateOfBirth: Date!, alive: Boolean!): Person!
-    updatePerson(id: ID!, firstname: String!, dateOfBirth: Date!, alive: Boolean!): Person!
     createAddress(address: AddressInput!): Address
     updateAddress(id: ID!, street: String!,additional: String,number: String,zipcode: String!,city: String!,state: String,country: String!, addressType: String!): Address
 }

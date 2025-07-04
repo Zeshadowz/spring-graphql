@@ -1,10 +1,10 @@
 package com.cubestech.graphqlapi;
 
-import com.cubestech.graphqlapi.dao.CustomerRepository;
-import com.cubestech.graphqlapi.enums.AddressType;
-import com.cubestech.graphqlapi.enums.Gender;
-import com.cubestech.graphqlapi.model.Address;
-import com.cubestech.graphqlapi.model.Customer;
+import com.cubestech.graphqlapi.adapter.out.db.dao.CustomerRepository;
+import com.cubestech.graphqlapi.adapter.out.db.entity.Address;
+import com.cubestech.graphqlapi.adapter.out.db.entity.Customer;
+import com.cubestech.graphqlapi.domain.enums.AddressType;
+import com.cubestech.graphqlapi.domain.enums.Gender;
 import com.cubestech.graphqlapi.utils.CodeGenerator;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
